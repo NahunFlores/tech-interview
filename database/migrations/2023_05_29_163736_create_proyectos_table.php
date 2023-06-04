@@ -18,6 +18,16 @@ class CreateProyectosTable extends Migration
             $table->string('nombre',50)->nullable(false);
             $table->date('fecha_incial')->nullable(false);
             $table->date('fecha_final')->nullable(false);
+            $table->enum('estado', [
+                'Pendiente',
+                'En progreso',
+                'Completada',
+                'En revisión',
+                'Aplazada',
+                'Bloqueada',
+                'Cancelada',
+                'Rechazada'
+            ])->default('Pendiente')->nullable(false);
             $table->unsignedBigInteger('id_user_crear')->nullable(false);
             $table->foreign('id_user_crear')->references('id')->on('users');
             $table->timestamps();

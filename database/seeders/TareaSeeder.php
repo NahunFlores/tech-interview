@@ -2,18 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Tarea;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class TareaSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-        Tarea::factory(10000)->create();
+        //
     }
 }

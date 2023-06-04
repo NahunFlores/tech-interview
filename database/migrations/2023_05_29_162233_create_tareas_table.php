@@ -20,14 +20,16 @@ class CreateTareasTable extends Migration
             $table->date('fecha_limite')->nullable(false);
             $table->unsignedBigInteger('responsable')->nullable();
             $table->foreign('responsable')->references('id')->on('users');
-            $table->enum('estado',['Pendiente',
-                                    'En progreso',
-                                    'Completada',
-                                    'En revisión',
-                                    'Aplazada',
-                                    'Bloqueada',
-                                    'Cancelada',
-                                    'Rechazada'])->nullable(false);
+            $table->enum('estado', [
+                'Pendiente',
+                'En progreso',
+                'Completada',
+                'En revisión',
+                'Aplazada',
+                'Bloqueada',
+                'Cancelada',
+                'Rechazada'
+            ])->default('Pendiente')->nullable(false);
             $table->timestamps();
         });
     }
