@@ -2,28 +2,48 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AsignacionSeguimiento;
+use App\Models\Proyecto;
+use App\Models\Tarea;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
 
 class ProyectoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public $reglas = [
+        'nombre' => 'required',
+        'fecha_incial' => 'required|date',
+        'fecha_final' => 'required|date|after:fecha_incial',
+        'id_user_crear' => 'required|integer',
+    ];
+
+    public $mensajes = [
+        'required' => 'El campo :attribute es obligatorio.',
+        'date' => 'El campo :attribute debe ser una fecha válida.',
+        'integer' => 'El campo :attribute debe ser un número entero.',
+        'after' => 'El campo :attribute debe ser una fecha posterior a la fecha inicial.',
+    ];
+
     public function index()
     {
-        //
-    }
+        $proyectos = Proyecto::all(['id','nombre','fecha_incial','fecha_final','estado','id_user_crear']);
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        foreach ($proyectos as $key => $value) {
+            $seguimiento = AsignacionSeguimiento::where('proeycto_id','=',$value->id)->get(['tarea_id']);
+            $tareas = [];
+            foreach($seguimiento as $seguim){
+                array_push($tareas,Tarea::leftJoin('users','users.id','=','tareas.responsable')
+                                            ->select('tareas.id','descripcion','prioridad','fecha_limite','responsable','estado','users.name')
+                                            ->findOrFail($seguim->tarea_id));
+            }
+            $value->tareas = $tareas;
+        }
+
+        return response()->json([
+            'data' => $proyectos,
+            "estado" => 0
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -34,7 +54,23 @@ class ProyectoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->post();
+        $validator = Validator::make($data,$this->reglas,$this->mensajes);
+
+        if ($validator->fails()) {
+            $errors = $validator->errors()->all();
+            return response()->json([
+                'errors' => $errors,
+                "estado" => 1
+            ],  Response::HTTP_OK);
+        }
+
+        $proyecto = Proyecto::create($data);
+
+        return response()->json([
+            'data' =>  $proyecto,
+            "estado" => 0
+        ], Response::HTTP_CREATED);
     }
 
     /**
@@ -43,20 +79,12 @@ class ProyectoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Proyecto $proyecto)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return response()->json([
+            'data' =>  $proyecto,
+            "estado" => 0
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -66,9 +94,26 @@ class ProyectoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Proyecto $proyecto)
     {
-        //
+        $data = $request->post();
+        $validator = Validator::make($data,$this->reglas,$this->mensajes);
+
+        if ($validator->fails()) {
+            $errors = $validator->errors()->all();
+            return response()->json([
+                'errors' => $errors,
+                "estado" => 1
+            ],  Response::HTTP_OK);
+        }
+
+        $proyecto->update($data);
+
+        return response()->json([
+            'data' =>  $proyecto,
+            "estado" => 0
+        ], Response::HTTP_CREATED);
+
     }
 
     /**
@@ -77,8 +122,12 @@ class ProyectoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Proyecto $proyecto)
     {
-        //
+        $proyecto->delete();
+        return response()->json([
+            'data' =>  'Proyecto Eliminada',
+            "estado" => 0
+        ], Response::HTTP_OK);
     }
 }
