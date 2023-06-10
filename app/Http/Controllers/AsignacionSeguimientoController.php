@@ -2,83 +2,52 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comentario;
+use App\Models\Proyecto;
+use App\Models\Tarea;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AsignacionSeguimientoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function metricas()
     {
-        //
+        $datos = DB::select("SELECT users.id,
+                                    users.name,
+                                    users.email,
+                                    (SELECT count(tareas.id) FROM tareas WHERE tareas.responsable = users.id AND tareas.estado = 'Completada') AS 'Completadas',
+                                    (SELECT count(tareas.id) FROM tareas WHERE tareas.responsable = users.id AND tareas.estado = 'En Proceso') AS 'EnProceso',
+                                    (SELECT count(tareas.id) FROM tareas WHERE tareas.responsable = users.id AND tareas.estado = 'Pendiente') AS 'Pendiente'
+                            FROM users;");
+
+        return response()->json([
+            'datos' => $datos,
+            'estado' => 0
+        ],  Response::HTTP_OK);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function actualizarEstado(Request $request)
     {
-        //
-    }
+        if ($request->post('tipo') == 'proyecto') {
+            $proyecto = Proyecto::find($request->post('id'));
+            $proyecto->estado = $request->post('estado');
+            $proyecto->save();
+        } else {
+            $tarea = Tarea::find($request->post('id'));
+            $tarea->estado = $request->post('estado');
+            $tarea->save();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+            $comentario = new Comentario();
+            $comentario->tarea_id = $request->post('id');
+            $comentario->contenido = $request->post('comentario');
+            $comentario->usuario_id = Auth::user()->id;
+            $comentario->save();
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return response()->json([
+            "estado" => 0,
+        ], Response::HTTP_OK);
     }
 }
