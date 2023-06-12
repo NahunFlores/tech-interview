@@ -110,80 +110,88 @@ a {
     display: none;
 }
 
-@media (min-width: 800px){
+@media (min-width: 800px) {
     .custom-d-sm-block {
-        display: block!important;
+        display: block !important;
     }
 
 }
 
-@media (max-width: 800px){
+@media (max-width: 800px) {
     .custom-d-sm-block {
-        display: none!important;
+        display: none !important;
     }
 
     #subMenu {
         display: inline-grid;
         cursor: pointer;
         z-index: 12;
-        display: block!important;
+        display: block !important;
     }
 }
 
-.container-margin{
+.container-margin {
     padding-top: 90px;
 }
 
-.position-relative{
+.position-relative {
     z-index: 9999;
 }
 
-.t-left{
+.t-left {
     text-align: left !important;
 }
 
-   /* login */
+/* login */
 
-.form-container{
-    background: linear-gradient(#1d1aee,#00f0dc);
+.form-container {
+    background: linear-gradient(#1d1aee, #00f0dc);
     font-family: 'Roboto', sans-serif;
     font-size: 0;
     padding: 0 15px;
     border: 1px solid #0a2d61;
     border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
-.form-container .form-icon{
+
+.form-container .form-icon {
     color: #fff;
     font-size: 13px;
     text-align: center;
-    text-shadow: 0 0 20px rgba(0,0,0,0.2);
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     width: 50%;
     padding: 70px 0;
     vertical-align: top;
     display: inline-block;
 }
-.form-container .form-icon i{
+
+.form-container .form-icon i {
     font-size: 124px;
     margin: 0 0 15px;
     display: block;
 }
-.form-container .form-icon .signup a{
+
+.form-container .form-icon .signup a {
     color: #fff;
     text-transform: capitalize;
     transition: all 0.3s ease;
 }
-.form-container .form-icon .signup a:hover{ text-decoration: underline; }
-.form-container .form-horizontal{
-    background: rgba(255,255,255,0.99);
+
+.form-container .form-icon .signup a:hover {
+    text-decoration: underline;
+}
+
+.form-container .form-horizontal {
+    background: rgba(255, 255, 255, 0.99);
     width: 50%;
     padding: 60px 30px;
     margin: -20px 0;
     border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     display: inline-block;
 }
-.form-container .title{
+
+.form-container .title {
     color: #454545;
     font-size: 23px;
     font-weight: 900;
@@ -192,13 +200,15 @@ a {
     letter-spacing: 0.5px;
     margin: 0 0 30px 0;
 }
-.form-horizontal .form-group{
-    background-color: rgba(255,255,255,0.15);
+
+.form-horizontal .form-group {
+    background-color: rgba(255, 255, 255, 0.15);
     margin: 0 0 15px;
     border: 1px solid #b5b5b5;
     border-radius: 20px;
 }
-.form-horizontal .input-icon{
+
+.form-horizontal .input-icon {
     color: #b5b5b5;
     font-size: 15px;
     text-align: center;
@@ -208,7 +218,8 @@ a {
     vertical-align: top;
     display: inline-block;
 }
-.form-horizontal .form-control{
+
+.form-horizontal .form-control {
     color: #000000;
     background-color: transparent;
     font-size: 14px;
@@ -222,22 +233,26 @@ a {
     display: inline-block;
     transition: all 0.3s;
 }
-.form-horizontal .form-control:focus{
+
+.form-horizontal .form-control:focus {
     box-shadow: none;
     border: none;
 }
-.form-horizontal .form-control::-moz-placeholder{
+
+.form-horizontal .form-control::-moz-placeholder {
     color: #b5b5b5;
     font-size: 13px;
     text-transform: capitalize;
 }
-.form-horizontal .form-control::placeholder{
+
+.form-horizontal .form-control::placeholder {
     color: #b5b5b5;
     font-size: 13px;
     text-transform: capitalize;
 }
-.form-horizontal .btn{
-    color: rgba(255,255,255,0.8);
+
+.form-horizontal .btn {
+    color: rgba(255, 255, 255, 0.8);
     background: #5795f3;
     font-size: 15px;
     font-weight: 500;
@@ -249,34 +264,90 @@ a {
     border-radius: 20px;
     transition: all 0.3s ease;
 }
+
 .form-horizontal .btn:hover,
-.form-horizontal .btn:focus{
+.form-horizontal .btn:focus {
     color: #fff;
     background-color: #2411d3;
-    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
-.form-horizontal .forgot-pass{
+
+.form-horizontal .forgot-pass {
     font-size: 12px;
     text-align: center;
     display: block;
 }
-.form-horizontal .forgot-pass a{
+
+.form-horizontal .forgot-pass a {
     color: #999;
     transition: all 0.3s ease;
 }
-.form-horizontal .forgot-pass a:hover{
+
+.form-horizontal .forgot-pass a:hover {
     color: #777;
     text-decoration: underline;
 }
-@media only screen and (max-width:576px){
-    .form-container{ padding-bottom: 15px; }
-    .form-container .form-icon{
+
+@media only screen and (max-width:576px) {
+    .form-container {
+        padding-bottom: 15px;
+    }
+
+    .form-container .form-icon {
         width: 100%;
         padding: 20px 0;
     }
-    .form-container .form-horizontal{
+
+    .form-container .form-horizontal {
         width: 100%;
         margin: 0;
     }
+}
+
+
+
+/* Estilos del chat de comentarios de las tareas  */
+
+.body-chat {
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.container-chat {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.darker-chat {
+    border-color: #ccc;
+    background-color: #ddd;
+}
+
+.container-chat::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.container-chat label {
+    float: left;
+    width: 100%;
+    text-align: start;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+
+.time-right {
+    float: right;
+    color: #aaa;
+}
+
+.time-left {
+    float: left;
+    color: #999;
 }
 
