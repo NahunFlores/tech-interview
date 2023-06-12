@@ -47,3 +47,72 @@ Calidad del código, legibilidad, reusabilidad, atención al detalle en el dise�
 
 
 ## VI - Pasos para iniciar/ejecutar el proyecto [Completa esta sección]
+
+# Proyecto con Vue.js 3 y Laravel 8 API con Passport
+
+Este es un proyecto de ejemplo que utiliza Vue.js 3 como framework de frontend y Laravel 8 como framework de backend para crear una API con autenticación utilizando Laravel Passport.
+
+## Requisitos previos instalados
+* PHP 7.3 o superior (se recomienda PHP 8.0)
+* Node.js 14 o superior
+* Debes tener Laravel 8 y todas sus dependencias instaladas.
+* Laragon con el servidor MySQL configurado.
+
+## Pasos para configurar el proyecto
+
+1. Clona este repositorio en tu máquina local.
+
+2. Entra al directorio del proyecto:
+
+   ```bash
+   cd nombre-del-proyecto
+   
+3. Instala las dependencias del frontend:
+
+   ```bash
+    npm install
+    
+4. Configura la conexión de la base de datos y cualquier otra variable necesaria.
+    
+    4.1 Crea un archivo .env en la raíz del proyecto basándote en el archivo          .env.example.
+    
+    4.2 Configura la conexión de la base de datos y cualquier otra variable necesaria. Asegúrate de utilizar las siguientes configuraciones para Laravel y MySQL:
+
+    ```makefile
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=base_de_datos
+    DB_USERNAME=root
+    DB_PASSWORD=
+
+5. Genera una nueva clave de aplicación para Laravel:
+
+   ```bash
+    php artisan key:generate
+    
+6. Ejecuta las migraciones de la base de datos:
+
+    ```bash
+    php artisan migrate
+7. Instala las dependencias del backend:
+
+    ```bash
+    composer install
+
+8. Genera las claves de encriptación de Passport:
+
+    ```bash
+    php artisan passport:install
+
+9. Inicia el servidor de desarrollo de Laravel:
+
+    ```bash
+    php artisan serve
+    
+10. En otra ventana de terminal, compila los assets y observa los cambios:
+
+    ```bash
+    npm run watch
+    
+11. Abre tu navegador y visita http://localhost:8000 para ver la aplicación en funcionamiento.
