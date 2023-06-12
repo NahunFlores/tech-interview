@@ -94,7 +94,7 @@ Este es un proyecto de ejemplo que utiliza Vue.js 3 como framework de frontend y
 6. Ejecuta las migraciones de la base de datos:
 
     ```bash
-    php artisan migrate
+    php artisan migrate --seed //semilla que contiene el administrador
 7. Instala las dependencias del backend:
 
     ```bash
@@ -116,3 +116,7 @@ Este es un proyecto de ejemplo que utiliza Vue.js 3 como framework de frontend y
     npm run watch
     
 11. Abre tu navegador y visita http://localhost:8000 para ver la aplicación en funcionamiento.
+
+    Usuario: admin@gmail.com
+    Contraseña: 12345678
+
